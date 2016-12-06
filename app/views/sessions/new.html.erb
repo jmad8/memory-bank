@@ -1,0 +1,15 @@
+<% provide(:title, "Log in") %>
+<h1>Log in</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 col-xs-12">
+    <%= form_for(:session, url: login_path) do |f| %>
+      <%= render "fields", f: f, edit: false %>
+
+  	  <div class="row">
+  	    <%= f.submit "Log in", class: "btn btn-primary" %>
+  	  </div>
+    <% end %>
+    <p>New user? <%= link_to "Sign up now!", new_account_path %></p>
+  </div>
+</div>

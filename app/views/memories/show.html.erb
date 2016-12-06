@@ -1,0 +1,69 @@
+<% if params[:tab] == "dissolver" %>
+
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="dissolver-container">
+				<%= make_text_dissolve(@memory.text) %>
+			</div>
+		</div>
+	</div>
+	<div class="row" style="margin:10px 0;">
+		<div class="col-sm-12">
+			<button class="dissolver-btn" onclick="appear_all()">
+				<span class="word">
+					<span class="letter">A</span><span class="letter">a</span>
+				</span>
+			</button>
+			<button class="dissolver-btn" onclick="dissolve_partial_all()">
+				<span class="word dissolve-partial">
+					<span class="letter">A</span><span class="letter">a</span>
+				</span>
+			</button>
+			<button class="dissolver-btn" onclick="dissolve_all()">
+				<span class="word dissolve">
+					<span class="letter">A</span><span class="letter">a</span>
+				</span>
+			</button>
+		</div>
+	</div>
+
+<% elsif params[:tab] == "typer" %>
+
+	<div contenteditable="true" class="text_typer" rows="5" data-text="<%= @memory.text %>" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-placeholder="Start typing memory text here..."></div>
+	
+	<div class="row">
+		<div class="checkbox col-xs-12">
+			<button class="btn btn-large" onclick="display_hint(false)">Hint</button>
+			<button class="btn btn-large" onclick="display_hint(true)">Hint Word</button>
+		</div>
+		<div class="checkbox col-xs-12">
+			<label>
+				<input id="ignore-case" type="checkbox" checked="true"> Ignore Case
+			</label>
+		</div>
+		<div class="checkbox col-xs-12">
+			<label>
+				<input id="ignore-punctuation" type="checkbox" checked="true"> Ignore Punctuation
+			</label>
+		</div>
+	</div>
+	<script>
+		$(".text_typer").get(0).focus();
+	</script>
+
+<% else %>
+
+	<div class="row" style="margin:10px 0;">
+		<div class="col-sm-12">
+			<%= @memory.text %>
+		</div>
+	</div>
+
+	<div class="row" style="margin:10px 0;">
+		<div class="col-sm-12">
+			<a class="btn btn-success" id="bookmarklet" >Try Spritz!</a>
+			<h6 id="spritz-error" >Uh-oh! Spritz failed to load. Refresh the page and try again!</h6>
+		</div>
+	</div>
+
+<% end %>

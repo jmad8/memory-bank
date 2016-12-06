@@ -1,0 +1,7 @@
+<% provide(:title, 'New Memory') %>
+
+<%= form_for @memory, url: {action: 'create'} do |f| %>
+	<%= render 'shared/error_messages', object: @memory %>
+	<%= render 'fields', f: f %>
+	<%= render 'shared/form_buttons', f: f, object: nil, cancel_path: memories_path, delete_title: nil %> 
+<% end %>

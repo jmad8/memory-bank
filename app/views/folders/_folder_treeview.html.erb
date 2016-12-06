@@ -1,0 +1,28 @@
+
+<h2 style="margin-bottom:5px; margin-left:10px;" class="text-left">Folders</h2>
+<div id="tree" class="no-select"></div>
+<% content_for :script do %>
+
+	<% folder_id = @folder != nil ? @folder.id : nil %>
+
+	function getTree() {
+		return <%= get_folder_treeview(@user.id, folder_id).to_json.html_safe %>;
+	}
+
+	$(document).ready(function () {
+		
+		$('#tree').treeview
+		({
+			data: getTree(), 
+			enableLinks: true, 
+			showBorder: false,
+			expandIcon: "glyphicon glyphicon-folder-close", 
+			collapseIcon: "glyphicon glyphicon-folder-open", 
+			emptyIcon:   "glyphicon glyphicon-plus-sign",
+			levels: 0
+		});
+		$('#tree').treeview('revealNode', [ <%= @nodeId || 0 %> ]);
+		$('#tree').treeview('expandNode', [ <%= @nodeId || 0 %> ]);
+	});
+
+<% end %>

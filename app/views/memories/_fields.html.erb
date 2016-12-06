@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-sm-12">
+    <%= f.label :folder_id %>
+    <%= f.select :folder_id, options_for_select(@folders, selected_key = f.object.folder_id), {}, class: "form-control"%> 
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <%= f.label :title %>
+    <%= f.text_field :title, class: 'form-control', placeholder: "Enter title" %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <%= f.label :subtitle %>
+    <%= f.text_field :subtitle, class: 'form-control', placeholder: "Enter subtitle (optional)" %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <%= f.label :text %>
+    <%= f.text_area :text, class: 'form-control', placeholder: "Enter text", rows: 10 %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-8">
+    <%= f.label :source %>
+    <%= f.text_field :source, class: 'form-control', placeholder: "Enter source (optional)" %>
+  </div>
+  <div class="col-sm-4">
+    <%= f.label :start_date %>
+    <%= f.text_field :start_date, :value => (@memory.start_date.blank? ? Date.today : @memory.start_date), class: 'form-control date-picker', readonly: "true", placeholder: "Enter date", style:"cursor:default;background-color:white;" %>
+  </div>
+</div>
+<div id="reminders" class="row">
+  <%= f.fields_for :reminders do |builder| %>
+    <%= render 'reminder_fields', f: builder %>
+  <% end %>
+</div>
+  
+<div class="row">
+  <div class="col-sm-12">
+    <%= link_to_add_fields "Add a Reminder", f, :reminders %>
+  </div>
+</div>
+

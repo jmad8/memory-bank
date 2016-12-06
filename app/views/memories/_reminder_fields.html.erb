@@ -1,0 +1,19 @@
+<div class="reminder-row col-sm-12">
+	<div class="then">
+		<span>Then</span>
+		<hr/>
+	</div>
+	<div class="reminder">
+		<span>
+			Remind every 
+			<%= f.number_field :time_unit_quantity, in: 1...1000, class: "time-unit-quantity"%> 
+			<%= f.select :time_unit_id, options_for_select(@time_units.map{|tu| [tu.unit, tu.id]}, selected_key = f.object.time_unit_id), {}, class: "time-unit"%> 
+			for
+			<%= f.number_field :repeat_quantity, in: 1...1000, class: "repeat-quantity" %>
+			cycle(s)
+		</span>
+		<a role="button" class="reminder-remove pull-right">
+			<i class="glyphicon glyphicon-remove-sign"></i>
+		</a>
+	</div>
+</div>

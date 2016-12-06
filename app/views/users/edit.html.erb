@@ -1,0 +1,25 @@
+<% provide(:title, 'Edit profile') %>
+<h1>Edit profile</h1>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2 col-xs-12">
+    <%= form_for @user, url: {action: "update" } do |f| %>
+      <%= render 'shared/error_messages', object: @user %>
+      <%= render 'fields', f: f %>
+      <div class="row">
+      	<%= f.submit "Save", class: "btn btn-large btn-primary" %>
+      </div>
+      <div class="row">
+        <%= link_to "Cancel", memories_path, class: "btn btn-large btn-danger" %>
+	    </div>
+    <% end %>
+    <div class="gravatar-edit">
+      <div>
+        <%= gravatar_for @user, class: "gravatar-edit" %>
+      </div>
+      <div>
+        <a href="http://gravatar.com/emails" target="_blank">Change</a>
+      </div>
+    </div>
+  </div>
+</div>

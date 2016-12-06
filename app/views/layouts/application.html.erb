@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title><%= app_name %> | <%= yield :title %></title>
+    <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "bootstrap-treeview" %>
+    <%= csrf_meta_tags %>
+    <%= render 'layouts/shim' %>
+    <script>
+      <%= yield(:script) if content_for?(:script) %>
+    </script
+</head>
+    <%= render 'layouts/header' %>
+<body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <% flash.each do |key, value| %>
+            <div class="alert alert-<%=key%> alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+              </button>
+              <%= value %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="row" style="max-width:900px;margin:0 auto">
+
+        <div>
+          <%= content_for?(:content) ? yield(:content) : yield %>
+        </div>
+      </div>
+      <%= render 'layouts/footer' %>
+      <%= debug(params) if Rails.env.development? %>
+    </div>
+</body>
+</html>

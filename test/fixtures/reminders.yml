@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  memory_id: 1
+  priority: 1
+  repeat_quantity: 1
+  repeat_unit_id: 1
+  duration_quantity: 1
+  duration_unit_id: 1
+
+two:
+  memory_id: 1
+  priority: 1
+  repeat_quantity: 1
+  repeat_unit_id: 1
+  duration_quantity: 1
+  duration_unit_id: 1

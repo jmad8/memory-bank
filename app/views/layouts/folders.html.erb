@@ -1,0 +1,32 @@
+<% content_for :content do %>
+	<div class="row">
+		<aside class="col-xs-12 col-sm-4" >
+			<%= render "folders/folder_treeview" %>
+		</aside>
+		<div class="col-xs-12 col-sm-8">
+			<div class="row">
+				<div class="col-xs-12">
+					<h1 class="user-layout-title">
+						<%= content_for?(:header) ? yield(:header) : yield(:title) %>
+					</h1>
+					<% if content_for?(:subtitle) %>
+						<h3 class="user-layout-subtitle">
+							<%= yield(:subtitle) %>
+						</h3>
+					<% end %>
+				</div>
+			</div>
+			
+			<%= content_for?(:subcontent) ? yield(:subcontent) : yield %>
+			<% if @folder != nil %>
+				<% if !@new_folder && !@edit_folder %>
+					<%= link_to "Add folder", new_folder_path(folder: @folder.id) %>
+				<% end %>
+				<% if @folder.id != nil && !@edit_folder %>
+					| <%= link_to "Edit this folder", edit_folder_path(@folder) %>
+				<% end %>
+			<% end %>
+		</div>
+	</div>
+<% end %>
+<%= render template: "layouts/application" %>

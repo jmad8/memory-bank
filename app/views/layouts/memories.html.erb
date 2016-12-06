@@ -1,0 +1,54 @@
+<% provide(:title, @memory.title) %>
+<% if @memory.subtitle.to_s.strip.length != 0 %>
+	<% provide(:subtitle, @memory.subtitle) %>
+<% end %>
+
+<% content_for :subcontent do %>
+
+	<% if @previous_memory != nil || @next_memory != nil %>
+		<div style="position:relative">
+			<ul class="pager" style="margin:5px 0;">
+				<li class="previous<% if @previous_memory == nil %> disabled<% end %>">
+					<%= link_to "Previous", @previous_memory != nil ? memory_path(@previous_memory, get_query_string(params[:tab] == nil ? nil : {tab: params[:tab]})) : "#" %>	
+				</li>
+				<li class="next<% if @next_memory == nil %> disabled<% end %>">
+					<%= link_to "Next", @next_memory != nil ? memory_path(@next_memory, get_query_string(params[:tab] == nil ? nil : {tab: params[:tab]})) : "#" %>	
+				</li>
+			</ul>
+		</div>
+		<hr style="margin-top: 10px">
+	<% end %>
+
+	<ul class="nav nav-pills nav-justified">
+	  <li role="presentation" <% if params[:tab] != "dissolver" && params[:tab] != "typer" %>class="active"<% end %>>
+	  	<%= link_to "Read", memory_path(@memory, get_query_string) %>
+	  </li>
+	  <li role="presentation" <% if params[:tab] == "dissolver" %>class="active"<% end %>>
+	  	<%= link_to "Dissolver", memory_path(@memory, get_query_string(tab: "dissolver")) %>
+	  </li>
+	  <li role="presentation" <% if params[:tab] == "typer" %>class="active"<% end %>>
+	  	<%= link_to "Typer", memory_path(@memory, get_query_string(tab: "typer")) %>
+	  </li>
+	</ul>
+	<div style="margin:10px 0">
+		<%= yield %>
+	</div>
+
+	<div>
+		<% if @memory.source.to_s.strip.length != 0 %>
+			<%= link_to "View Source", @memory.source, :target => "_blank" %> |
+		<% end %>
+
+		<%= link_to 'Edit', edit_memory_path(@memory) %>
+		<% if params[:offset] != nil %>
+			<div class="pull-right">
+				<%= link_to "Back", memories_path(offset: params[:offset]) %>
+			</div>
+		<% elsif params[:folder] != nil %>
+			<div class="pull-right">
+				<%= link_to "Back", memories_path(folder: params[:folder]) %>
+			</div>
+		<% end %>
+	</div>
+<% end %>
+<%= render template: "layouts/folders" %>

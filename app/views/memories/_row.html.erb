@@ -1,0 +1,13 @@
+<div class="row" onclick="document.location = '<%= url %>';">
+	<div class="col-xs-12">
+		<div style="display:inline-block;">
+			<div class="title">
+				<i class="glyphicon glyphicon-<%= icon %>"></i>
+				<%= truncate(title, length: 100) %>
+			</div>
+			<div class="subtitle">
+				<%= truncate(subtitle, length: 100) %>
+			</div>
+		</div>
+	</div> 
+</div>

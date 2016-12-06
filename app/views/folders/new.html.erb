@@ -1,0 +1,7 @@
+<% provide(:title, 'New Folder') %>
+
+<%= form_for @folder, url: {action: 'create'} do |f| %>
+	<%= render 'shared/error_messages', object: @folder %>
+	<%= render 'fields', f: f %>
+	<%= render 'shared/form_buttons', f: f, object: @folder, cancel_path: memories_path, delete_title: nil %> 
+<% end %>

@@ -1,0 +1,22 @@
+<% provide(:title, @title) %>
+
+<% if @date != nil %>
+  <div style="position:relative">
+    <ul class="pager" style="margin:5px 0;">
+      <li class="previous">
+        <%= link_to (@date - 1.day).strftime("%b %-d"), memories_path(offset: @offset - 1) %>
+      </li>
+      <li class="next">
+        <%= link_to (@date + 1.day).strftime("%b %-d"), memories_path(offset: @offset + 1) %>
+      </li>
+    </ul>
+  </div>
+  <hr style="margin-top: 10px">
+<% end %>
+
+<div class="memory_rows">
+  <% @memories.each do |memory| %>
+    <%= render "row", url: memory_path(memory, get_query_string), title: memory.title, subtitle: memory.subtitle, icon: "" %>
+  <% end %>
+  <%= render "row", url: new_memory_path(folder: params[:folder] || 0), title: @folder == nil ? "Add new memory" : "Add new memory to #{@folder.name}", subtitle: "", icon: "plus-sign" %>
+</div>
