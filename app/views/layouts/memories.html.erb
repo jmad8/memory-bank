@@ -9,10 +9,10 @@
 		<div style="position:relative">
 			<ul class="pager" style="margin:5px 0;">
 				<li class="previous<% if @previous_memory == nil %> disabled<% end %>">
-					<%= link_to "Previous", @previous_memory != nil ? memory_path(@previous_memory, get_query_string(params[:tab] == nil ? nil : {tab: params[:tab]})) : "#" %>	
+					<%= link_to "Previous", @previous_memory != nil ? memory_path(@previous_memory, get_query_string(params[:tab] == nil ? nil : {tab: params[:tab]})) : "#" %>
 				</li>
 				<li class="next<% if @next_memory == nil %> disabled<% end %>">
-					<%= link_to "Next", @next_memory != nil ? memory_path(@next_memory, get_query_string(params[:tab] == nil ? nil : {tab: params[:tab]})) : "#" %>	
+					<%= link_to "Next", @next_memory != nil ? memory_path(@next_memory, get_query_string(params[:tab] == nil ? nil : {tab: params[:tab]})) : "#" %>
 				</li>
 			</ul>
 		</div>

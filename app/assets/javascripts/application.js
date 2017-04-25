@@ -109,26 +109,35 @@ $(document).ready(function () {
 
 		var ignoreCase = $("#ignore-case").prop("checked");
 		var ignorePunctuation = $("#ignore-punctuation").prop("checked");
-		
-		var textChar = text.charAt(input.length);
-		if (inputChar != textChar){
-			if (ignoreCase && inputChar.toUpperCase() == textChar){
-				insertTextAtCursor(inputChar.toUpperCase());
-				return false;
-			}
-			else if (ignoreCase && inputChar.toLowerCase() == textChar){
-				insertTextAtCursor(inputChar.toLowerCase());
-				return false;
-			}
-			else if (ignorePunctuation && !isAlphaNumeric(textChar) && textChar != ' '){
-				if (inputChar == " ")
-					inputChar = "\u00A0";
-				insertTextAtCursor(textChar + inputChar);
-				return false;
-			}
-		}
+
+		return insertTextWhileNeeded(inputChar, ignoreCase, ignorePunctuation, text, input.length, false)
 	});
 })
+
+function insertTextWhileNeeded(inputChar, ignoreCase, ignorePunctuation, text, index, recursing) {
+	var textChar = text.charAt(index);
+	var nextChar = text.charAt(index+1);
+	console.log(textChar);
+	if (inputChar == textChar)
+		return true;
+
+	if (ignoreCase && inputChar.toUpperCase() == textChar) {
+		insertTextAtCursor(inputChar.toUpperCase());
+		return false;
+	}
+	else if (ignoreCase && inputChar.toLowerCase() == textChar) {
+		insertTextAtCursor(inputChar.toLowerCase());
+		return false;
+	}
+	else if (ignorePunctuation && !isAlphaNumeric(textChar) && textChar != ' ') {
+		insertTextAtCursor(textChar);
+		return insertTextWhileNeeded(inputChar, ignoreCase, ignorePunctuation, text, index + 1, true);
+	}
+	if (inputChar == " ")
+		inputChar = "\u00A0";
+	if (recursing && inputChar == "\u00A0")
+		return false;
+}
 
 function insertTextAtCursor(text) {
     var sel, range, textNode;
@@ -236,8 +245,8 @@ function dissolve_element(element)
 	}
 }
 
-function add_fields(link, association, content) {  
-    var new_id = new Date().getTime();  
-    var regexp = new RegExp("new_" + association, "g");  
-    $("#reminders").append(content.replace(regexp, new_id));  
+function add_fields(link, association, content) {
+    var new_id = new Date().getTime();
+    var regexp = new RegExp("new_" + association, "g");
+    $("#reminders").append(content.replace(regexp, new_id));
 }
